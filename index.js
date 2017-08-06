@@ -16,7 +16,7 @@ class Chassman {
         return this.history[0];
     }
 
-    get lastPosition(){
+    get lastPosition() {
         return this.history[1];
     }
 
@@ -32,6 +32,11 @@ class Chassman {
     undo() {
         this.checkboard.move(this.currentPosition.x, this.currentPosition.y, this.lastPosition.x, this.lastPosition.y);
         this.history.shift();
+    }
+
+    showMovableBlock() {
+        // use pattern
+        this.checkboard.block(this.currentPosition.x, this.currentPosition.y+1).highlight();
     }
 }
 
@@ -60,6 +65,10 @@ class Lattice {
                 this.value_ = ' ';
             }
         }
+    }
+
+    highlight() {
+        console.log(`${this.x}x${this.y} highlights!`);
     }
 
     lightOn() {
@@ -103,3 +112,5 @@ const board = new Checkerboard(8);
 const pawn = new Chassman('pawn', 'red', board, 2, 1);
 pawn.moveTo(2, 2);
 pawn.undo(2, 2);
+
+pawn.showMovableBlock();
